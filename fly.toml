@@ -33,7 +33,10 @@ primary_region = 'qro'
   strategy = "canary"
 
 
-  
+
+
+
+
 
 [[vm]]
   memory = '1gb'
