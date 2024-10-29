@@ -32,6 +32,9 @@ primary_region = 'qro'
 [deploy]
   strategy = "canary"
 
+
+  
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'
