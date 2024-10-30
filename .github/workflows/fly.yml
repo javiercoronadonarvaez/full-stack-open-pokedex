@@ -3,10 +3,15 @@ on:
   push:
     branches:
       - main # change to main if needed
+
+env:
+  CONDITION: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+
 jobs:
   deploy:
     name: Deploy app
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' && github.env.CONDITION == 'false' }}
     concurrency: deploy-group # optional: ensure only one action runs at a time
     steps:
       - uses: actions/checkout@v4
