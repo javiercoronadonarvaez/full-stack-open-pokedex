@@ -9,13 +9,10 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
-env:
-  CONDITION: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' && github.env.CONDITION == 'false' }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,6 +38,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -49,6 +47,6 @@ jobs:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.71.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
