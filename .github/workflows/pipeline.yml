@@ -66,15 +66,16 @@ jobs:
           severity: error
           details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Send Test Success Notification
-        if: ${{ success() }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"Test Succeeded!\"}" \
-          ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Send Test Failure Notification
-        if: ${{ failure() }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"Test Failed!\"}" \
-          ${{ secrets.DISCORD_WEBHOOK }}
+
+      # - name: Send Test Success Notification
+      #   if: ${{ success() }}
+      #   run: |
+      #     curl -X POST -H "Content-Type: application/json" \
+      #     -d "{\"content\": \"Test Succeeded!\"}" \
+      #     ${{ secrets.DISCORD_WEBHOOK }}
+      # - name: Send Test Failure Notification
+      #   if: ${{ failure() }}
+      #   run: |
+      #     curl -X POST -H "Content-Type: application/json" \
+      #     -d "{\"content\": \"Test Failed!\"}" \
+      #     ${{ secrets.DISCORD_WEBHOOK }}
