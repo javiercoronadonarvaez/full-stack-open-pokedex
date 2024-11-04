@@ -56,13 +56,11 @@ jobs:
         uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         if: ${{ success() }}
         with:
-          color: "green"
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Success
         uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         if: ${{ failure() }}
         with:
-          color: "red"
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
       # - name: Send Test Success Notification
