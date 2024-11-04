@@ -53,18 +53,16 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
       - name: Test Success
-        uses: EDUJOS/ds-webhook@v1.0.0
+        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         if: ${{ success() }}
         with:
-          title: Successful deployment
-          description: Implementation Succeeded!
+          color: "green"
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Success
-        uses: EDUJOS/ds-webhook@v1.0.0
+        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
         if: ${{ failure() }}
         with:
-          title: Unsuccessful deployment
-          description: Implementation failed!
+          color: "red"
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
       # - name: Send Test Success Notification
