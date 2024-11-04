@@ -1,0 +1,40 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  health_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run URL Health Check
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://full-stack-open-pokedex-ci-cd.fly.dev/
+          retry-delay: 5s
+          max-attempts: 3
+
+      - name: Health Check Success
+        uses: stegzilla/discord-notify@v4
+        if: ${{ success() }}
+        with:
+          title: Successful Healthcheck
+          message: Success! Website successfully reached
+          colour: "#00FF00"
+          username: javiercoronadonarvaez
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Health Check Failure
+        uses: stegzilla/discord-notify@v4
+        if: ${{ failure() }}
+        with:
+          title: Unsuccessful Healtchcheck
+          message: Website not reached
+          colour: "#FF0000"
+          username: javiercoronadonarvaez
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
