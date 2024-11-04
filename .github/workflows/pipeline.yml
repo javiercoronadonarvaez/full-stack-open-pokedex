@@ -52,14 +52,14 @@ jobs:
           DEFAULT_BUMP: patch
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: success()
+        if: ${{ success() }}
         with:
           severity: info
           details: Test Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
+        if: ${{ failure() }}
         with:
           severity: error
           details: Test Failed!
