@@ -53,14 +53,22 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
       - name: Test Success
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
+        uses: stegzilla/discord-notify@v4
         if: ${{ success() }}
         with:
+          title: Successful Tagging and Deployment
+          message: Success!
+          colour: #00FF00
+          username: javiercoronadonarvaez
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Success
-        uses: johnnyhuy/actions-discord-git-webhook@v1.0.1
+      - name: Test Failure
+        uses: stegzilla/discord-notify@v4
         if: ${{ failure() }}
         with:
+          title: Unsuccessful Tagging and Deployment
+          message: Failure!
+          colour: #FF0000
+          username: javiercoronadonarvaez
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
       # - name: Send Test Success Notification
