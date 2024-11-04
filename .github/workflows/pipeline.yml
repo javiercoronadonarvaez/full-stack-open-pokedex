@@ -58,7 +58,7 @@ jobs:
         with:
           title: Successful Tagging and Deployment
           message: Success!
-          colour: #00FF00
+          colour: "#00FF00"
           username: javiercoronadonarvaez
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
@@ -67,7 +67,7 @@ jobs:
         with:
           title: Unsuccessful Tagging and Deployment
           message: Failure!
-          colour: #FF0000
+          colour: "#FF0000"
           username: javiercoronadonarvaez
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
