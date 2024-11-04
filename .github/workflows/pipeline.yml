@@ -53,19 +53,19 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
       - name: Test Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: EDUJOS/ds-webhook@v1.0.0
         if: ${{ success() }}
         with:
-          severity: info
-          details: Test Succeeded!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
+          title: Successful deployment
+          description: Implementation Succeeded!
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Success
+        uses: EDUJOS/ds-webhook@v1.0.0
         if: ${{ failure() }}
         with:
-          severity: error
-          details: Test Failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Unsuccessful deployment
+          description: Implementation failed!
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 
       # - name: Send Test Success Notification
       #   if: ${{ success() }}
