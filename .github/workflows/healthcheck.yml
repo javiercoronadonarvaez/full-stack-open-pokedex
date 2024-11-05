@@ -1,5 +1,4 @@
-name: Deployment pipeline
-
+name: Health Check
 on:
   schedule:
     - cron: "0 */2 * * *"
