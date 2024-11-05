@@ -1,7 +1,8 @@
 name: Health Check
+
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 14 * * *" # Runs every 24 hours at 14:00 UTC
 
 jobs:
   health_check:
